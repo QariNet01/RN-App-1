@@ -1,0 +1,16 @@
+React Native App ..............
+
+--- Shopping List App ---
+
+...............................
+
+
+
+------------ Notes ------------
+
+- in <View> tag can be nested
+- Flexbox is: a concept/ set of styling properties that allow you to structure content (i.e. create layouts)
+- The default styling/ layout behavior of a <View> component is: it use flexbox to organize its child components 
+    <View> has flexDirection: 'column' (which is the default) 
+- will add a style as a dynamic way {for style{for code from Js}} -> <View style={{}}>
+- activeOpscity is attribute that show motion effect when click on button it come with <Touchable> Tag

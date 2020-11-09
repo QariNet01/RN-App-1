@@ -1,21 +1,51 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+
+import ListItem from './components/ListItem';
+import ListInput from './components/ListInput';
 
 export default function App() {
+
+  const [shoppingList, setShoppingList] = useState([]);
+
+  const addItemHandler = itemValue => {
+    setShoppingList(SList => [
+      ...SList,
+      { key: parseInt(Math.random() * 100).toString(), value: itemValue }
+    ]);
+  };
+
+  const removeItemHandler = itemID => {
+    setShoppingList(SList => {
+      return SList.filter((item) => item.key !== itemID);
+    });
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.rootView}>
+      <Text style={styles.headerTitle}>Shopping List</Text>
+
+      <ListInput onAddItem={addItemHandler} />
+
+      <FlatList data={shoppingList}
+        renderItem={itemData =>
+          <ListItem value={itemData.item.value} id={itemData.item.key} onDelete={removeItemHandler} />
+        }
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  rootView: {
+    padding: 50
   },
+
+  headerTitle: {
+    fontSize: 18,
+    // textAlign: 'center',
+    marginBottom: 10
+  },
+
 });
